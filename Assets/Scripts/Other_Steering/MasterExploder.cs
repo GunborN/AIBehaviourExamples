@@ -25,7 +25,7 @@ public class MasterExploder : MonoBehaviour {
             foreach (Collider item in explosions)
             {
                 item.gameObject.AddComponent<Rigidbody>();
-                item.gameObject.rigidbody.AddExplosionForce(50f, transform.position, 100000.0f, 3.0f);
+                item.gameObject.GetComponent<Rigidbody>().AddExplosionForce(50f, transform.position, 100000.0f, 3.0f);
             }
 
             explodeTime = MASTER_EXPLODE_TIME + Time.time;

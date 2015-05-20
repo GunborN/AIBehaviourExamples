@@ -31,11 +31,17 @@ public class ZombieBoidsAlgorithm2D : MonoBehaviour
 
 
     public int _humanCount;
+
     public float _velocityLimit;
-    public float _rule1Strength;
-    public float _rule2Strength;
-    public int _rule2Radius;
-    public float _rule3Strength;
+
+    public float _cohesionStrength;
+
+    public float _separationStrength;
+
+    public float _allignmentStrength;
+
+    public int _separationRadius
+        ;
     public int _flockRadius;
     public GameObject _target;
     public float _tendToStrength;
@@ -133,9 +139,9 @@ public class ZombieBoidsAlgorithm2D : MonoBehaviour
                 //normalizing these vectors will give the direction the boid should move to
                 //the magnitude of these vectors will give how fast the boid should move there
                 //relative to the timestep which is time.deltaTime;
-                v1 = _rule1Strength * Rule1(zombie);  //Flock Centering (Cohesion)											
-                v2 = _rule2Strength * Rule2(zombie);  //Collision Avoidance (Seperation)
-                v3 = _rule3Strength * Rule3(zombie);  //Velocity Matching (Alignment)						
+                v1 = _cohesionStrength * Cohesion(zombie);  //Flock Centering (Cohesion)											
+                v2 = _separationStrength * Separation(zombie);  //Collision Avoidance (Seperation)
+                v3 = _allignmentStrength * Allignment(zombie);  //Velocity Matching (Alignment)						
                 v4 = _tendToStrength * TendToPlace(_target, zombie);
 
                 /*
@@ -163,7 +169,7 @@ public class ZombieBoidsAlgorithm2D : MonoBehaviour
 
 	#region Rule 1: Boids try to fly towards the centre of mass of neighbouring boids.
 		
-	private Vector3 Rule1 (GameObject boid) //(cohesion
+	private Vector3 Cohesion (GameObject boid) //(cohesion
 	{
         if (_zombieList.Count > 1)
         {
@@ -206,7 +212,7 @@ public class ZombieBoidsAlgorithm2D : MonoBehaviour
 
 	#region Rule 2: Boids try to keep a small distance away from other objects (including other boids).
 		
-	private Vector3 Rule2 (GameObject boid)
+	private Vector3 Separation (GameObject boid)
 	{
 		BoidInfo boidInfo = boid.GetComponent<BoidInfo> (); //current boid info
 
@@ -222,7 +228,7 @@ public class ZombieBoidsAlgorithm2D : MonoBehaviour
 				//if the distance between the current boid and his neighbor
 				//is less than 10 they are too close and must be seperated
 								
-				if (Vector3.Distance (bInfo.Position, boidInfo.Position) < _rule2Radius) 
+				if (Vector3.Distance (bInfo.Position, boidInfo.Position) < _separationRadius) 
                 {		
 					//calculate a displacement to move them apart
 					//the displacement will result in a vector
@@ -239,7 +245,7 @@ public class ZombieBoidsAlgorithm2D : MonoBehaviour
 		
 	#region Rule 3: Boids try to match velocity with near boids.
 
-	private Vector3 Rule3 (GameObject boid)
+	private Vector3 Allignment (GameObject boid)
 	{
         if (_zombieList.Count > 1)
         {

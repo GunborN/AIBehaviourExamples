@@ -10,6 +10,6 @@ public class LightFade : MonoBehaviour {
 
 	void Update () 
     {
-        light.range = Mathf.Lerp(light.range, 0, Time.deltaTime);
+        GetComponent<Light>().range = Mathf.Lerp(GetComponent<Light>().range, 0, Time.deltaTime);
 	}
 }
