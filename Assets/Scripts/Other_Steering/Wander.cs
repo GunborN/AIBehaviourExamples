@@ -3,12 +3,12 @@ using System.Collections;
 
 public class Wander : MonoBehaviour 
 {
-    public const float MOVE_SPEED = 3; // The movement speed of the character
+    public float MOVE_SPEED = 3; // The movement speed of the character
     public const float GRAVITY = -50; // The force due to gravity (Constant for the purposes of this assignment)
-    public const float JITTER = 0.5f; // The interval to update the target position
-    public const float ON_FIRE_JITTER = 0.01f; // The interval to update the target position
-    public const float DISTANCE = 2f; // The distance from the character to the edge of the steering circle
-    public const float RADIUS = 2f; // The radius of the steering circle
+    public float JITTER = 0.5f; // The interval to update the target position
+    public float ON_FIRE_JITTER = 0.01f; // The interval to update the target position
+    public float DISTANCE = 2f; // The distance from the character to the edge of the steering circle
+    public float RADIUS = 2f; // The radius of the steering circle
 
     private CharacterController _controller; // The controller that is told how to move based on vector calculations
     private Vector3 _moveDirection; // The the directional vector of the character movement

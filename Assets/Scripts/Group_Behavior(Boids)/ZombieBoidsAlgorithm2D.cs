@@ -34,17 +34,23 @@ public class ZombieBoidsAlgorithm2D : MonoBehaviour
 
     public float _velocityLimit;
 
+    [Range(0.0f, 5.0f)]
+    public float _tendToStrength;
+
+    [Range(0.0f, 1.0f)]
     public float _cohesionStrength;
 
+    [Range(0.0f, 1.0f)]
     public float _separationStrength;
 
+    [Range(0.0f, 1.0f)]
     public float _allignmentStrength;
 
-    public int _separationRadius
-        ;
+    public int _separationRadius;
     public int _flockRadius;
     public GameObject _target;
-    public float _tendToStrength;
+
+    
 
     public GameObject _resetTarget;
     public GameObject _humans;
@@ -80,6 +86,7 @@ public class ZombieBoidsAlgorithm2D : MonoBehaviour
         //else if (ZombieSpawnRNG >= 50 && ZombieSpawnRNG <= 90)
         else
         {
+            
             clone = Instantiate(_rageZombiePrefab, spawnPoint.transform.position, transform.localRotation) as GameObject;
             clone.GetComponent<BoidInfo>().ZombieType = ZombieType.rage;
             clone.GetComponent<RageSeek>().target = _humanList[Random.Range(0, _humanList.Count)];
